@@ -1,0 +1,101 @@
+digraph G {
+  rankdir=LR;
+  splines=polyline;
+  nodesep=0.8;
+  ranksep=1.0;
+  node [shape=plain, fontname="Arial", fontsize=12];
+  edge [fontname="Arial", fontsize=10];
+
+  SensorModule [label=<
+   <table border="0" cellborder="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td>
+      </td>
+      <td>
+        <table border="1" cellborder="0" cellspacing="0" cellpadding="8" bgcolor="#f0f0f0">
+          <tr><td><b>SensorModule</b></td></tr>
+        </table>
+      </td>
+      <td>
+        <table border="0" cellborder="1" cellspacing="0" cellpadding="4" bgcolor="#ffffff">
+          <tr><td port="WheelSpeed_FL">WheelSpeed_FL</td></tr>
+          <tr><td port="WheelSpeed_FR">WheelSpeed_FR</td></tr>
+          <tr><td port="ThrottlePosition">ThrottlePosition</td></tr>
+          <tr><td port="BrakePressure">BrakePressure</td></tr>
+        </table>
+      </td>
+    </tr>
+   </table>>];
+
+  ECU [label=<
+   <table border="0" cellborder="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td>
+        <table border="0" cellborder="1" cellspacing="0" cellpadding="4" bgcolor="#ffffff">
+          <tr><td port="Input_WheelSpeed_FL">Input_WheelSpeed_FL</td></tr>
+          <tr><td port="Input_WheelSpeed_FR">Input_WheelSpeed_FR</td></tr>
+          <tr><td port="Input_ThrottlePosition">Input_ThrottlePosition</td></tr>
+          <tr><td port="Input_BrakePressure">Input_BrakePressure</td></tr>
+        </table>
+      </td>
+      <td>
+        <table border="1" cellborder="0" cellspacing="0" cellpadding="8" bgcolor="#f0f0f0">
+          <tr><td><b>ECU</b></td></tr>
+        </table>
+      </td>
+      <td>
+        <table border="0" cellborder="1" cellspacing="0" cellpadding="4" bgcolor="#ffffff">
+          <tr><td port="Output_Engine_RPM">Output_Engine_RPM</td></tr>
+          <tr><td port="Output_Brake_Actuation">Output_Brake_Actuation</td></tr>
+          <tr><td port="Output_Vehicle_Status">Output_Vehicle_Status</td></tr>
+        </table>
+      </td>
+    </tr>
+   </table>>];
+
+  ActuatorModule [label=<
+   <table border="0" cellborder="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td>
+        <table border="0" cellborder="1" cellspacing="0" cellpadding="4" bgcolor="#ffffff">
+          <tr><td port="Set_Engine_RPM">Set_Engine_RPM</td></tr>
+          <tr><td port="Set_Brake_Actuation">Set_Brake_Actuation</td></tr>
+        </table>
+      </td>
+      <td>
+        <table border="1" cellborder="0" cellspacing="0" cellpadding="8" bgcolor="#f0f0f0">
+          <tr><td><b>ActuatorModule</b></td></tr>
+        </table>
+      </td>
+      <td>
+      </td>
+    </tr>
+   </table>>];
+
+  CommunicationModule [label=<
+   <table border="0" cellborder="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td>
+        <table border="0" cellborder="1" cellspacing="0" cellpadding="4" bgcolor="#ffffff">
+          <tr><td port="ReceiveECUStatus">ReceiveECUStatus</td></tr>
+        </table>
+      </td>
+      <td>
+        <table border="1" cellborder="0" cellspacing="0" cellpadding="8" bgcolor="#f0f0f0">
+          <tr><td><b>CommunicationModule</b></td></tr>
+        </table>
+      </td>
+      <td>
+      </td>
+    </tr>
+   </table>>];
+
+
+  SensorModule:WheelSpeed_FL -> ECU:Input_WheelSpeed_FL;
+  SensorModule:WheelSpeed_FR -> ECU:Input_WheelSpeed_FR;
+  SensorModule:ThrottlePosition -> ECU:Input_ThrottlePosition;
+  SensorModule:BrakePressure -> ECU:Input_BrakePressure;
+  ECU:Output_Engine_RPM -> ActuatorModule:Set_Engine_RPM;
+  ECU:Output_Brake_Actuation -> ActuatorModule:Set_Brake_Actuation;
+  ECU:Output_Vehicle_Status -> CommunicationModule:ReceiveECUStatus;
+}

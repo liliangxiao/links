@@ -1,0 +1,24 @@
+<root>
+  <module name="SensorModule">
+    <port name="WheelSpeed_FL" type="int16_t" dir="out" dest_mod="ECU" dest_port="Input_WheelSpeed_FL" />
+    <port name="WheelSpeed_FR" type="int16_t" dir="out" dest_mod="ECU" dest_port="Input_WheelSpeed_FR" />
+    <port name="ThrottlePosition" type="uint8_t" dir="out" dest_mod="ECU" dest_port="Input_ThrottlePosition" />
+    <port name="BrakePressure" type="uint16_t" dir="out" dest_mod="ECU" dest_port="Input_BrakePressure" />
+  </module>
+  <module name="ECU">
+    <port name="Input_WheelSpeed_FL" type="int16_t" dir="in" dest_mod="" dest_port="" />
+    <port name="Input_WheelSpeed_FR" type="int16_t" dir="in" dest_mod="" dest_port="" />
+    <port name="Input_ThrottlePosition" type="uint8_t" dir="in" dest_mod="" dest_port="" />
+    <port name="Input_BrakePressure" type="uint16_t" dir="in" dest_mod="" dest_port="" />
+    <port name="Output_Engine_RPM" type="uint16_t" dir="out" dest_mod="ActuatorModule" dest_port="Set_Engine_RPM" />
+    <port name="Output_Brake_Actuation" type="uint8_t" dir="out" dest_mod="ActuatorModule" dest_port="Set_Brake_Actuation" />
+    <port name="Output_Vehicle_Status" type="CAN_Msg" dir="out" dest_mod="CommunicationModule" dest_port="ReceiveECUStatus" />
+  </module>
+  <module name="ActuatorModule">
+    <port name="Set_Engine_RPM" type="uint16_t" dir="in" dest_mod="" dest_port="" />
+    <port name="Set_Brake_Actuation" type="uint8_t" dir="in" dest_mod="" dest_port="" />
+  </module>
+  <module name="CommunicationModule">
+    <port name="ReceiveECUStatus" type="CAN_Msg" dir="in" dest_mod="" dest_port="" />
+  </module>
+</root>
