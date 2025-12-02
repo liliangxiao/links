@@ -31,8 +31,8 @@ The project uses a `Makefile` to simplify the build process.
 
 1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/your-username/links-project.git # Replace with actual repository URL
-    cd links-project
+    git clone https://github.com/your-username/links.git # Replace with actual repository URL
+    cd links
     ```
 2.  **Build the C executable:**
     ```bash
