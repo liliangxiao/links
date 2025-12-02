@@ -57,8 +57,8 @@ cd ./src/links
 To launch the Python-based GUI:
 
 ```bash
-cd src
-python3 src/gui.py
+cd build
+./gui.py
 ```
 
 ## Project Structure
