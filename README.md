@@ -1,6 +1,7 @@
 # Links Project
 
 ## Overview
+<img width="1411" height="878" alt="image" src="https://github.com/user-attachments/assets/c853b839-5f8c-41ca-b776-8a00309a00ca" />
 
 The Links Project is a robust and extensible application designed for managing, analyzing, and visualizing interconnected data points, referred to as "links." It provides both a command-line interface (CLI) for core functionalities and a graphical user interface (GUI) for intuitive interaction and visualization. The project is ideal for understanding complex relationships, network structures, or dependency graphs.
 
