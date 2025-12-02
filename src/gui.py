@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """
 @file gui.py
 @brief Graphical User Interface (GUI) for the Links Project.
