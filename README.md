@@ -46,8 +46,8 @@ The project uses a `Makefile` to simplify the build process.
 
 To run the core `links` CLI application:
 
-```bash
-cd ./src/links
+
+cd ./build/links
 ./links
 <img width="823" height="598" alt="image" src="https://github.com/user-attachments/assets/bd30b266-3eff-4ec5-aa15-c680af0e81a2" />
 <img width="776" height="395" alt="image" src="https://github.com/user-attachments/assets/63bf3033-ba9e-4e02-96d1-b0fe3d130937" />
