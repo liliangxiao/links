@@ -1,24 +1,48 @@
 <root>
-  <module name="SensorModule">
-    <port name="WheelSpeed_FL" type="int16_t" dir="out" dest_mod="ECU" dest_port="Input_WheelSpeed_FL" />
-    <port name="WheelSpeed_FR" type="int16_t" dir="out" dest_mod="ECU" dest_port="Input_WheelSpeed_FR" />
-    <port name="ThrottlePosition" type="uint8_t" dir="out" dest_mod="ECU" dest_port="Input_ThrottlePosition" />
-    <port name="BrakePressure" type="uint16_t" dir="out" dest_mod="ECU" dest_port="Input_BrakePressure" />
+  <module name="Camera">
+    <port name="raw" type="video" dir="out" dest_mod="ISP" dest_port="input" />
   </module>
-  <module name="ECU">
-    <port name="Input_WheelSpeed_FL" type="int16_t" dir="in" dest_mod="" dest_port="" />
-    <port name="Input_WheelSpeed_FR" type="int16_t" dir="in" dest_mod="" dest_port="" />
-    <port name="Input_ThrottlePosition" type="uint8_t" dir="in" dest_mod="" dest_port="" />
-    <port name="Input_BrakePressure" type="uint16_t" dir="in" dest_mod="" dest_port="" />
-    <port name="Output_Engine_RPM" type="uint16_t" dir="out" dest_mod="ActuatorModule" dest_port="Set_Engine_RPM" />
-    <port name="Output_Brake_Actuation" type="uint8_t" dir="out" dest_mod="ActuatorModule" dest_port="Set_Brake_Actuation" />
-    <port name="Output_Vehicle_Status" type="CAN_Msg" dir="out" dest_mod="CommunicationModule" dest_port="ReceiveECUStatus" />
+  <module name="ISP">
+    <port name="input" type="video" dir="in" dest_mod="" dest_port="" />
+    <port name="proc" type="image" dir="none" dest_mod="" dest_port="" />
+    <port name="proc2" type="image" dir="out" dest_mod="AI_Vision" dest_port="frame" />
   </module>
-  <module name="ActuatorModule">
-    <port name="Set_Engine_RPM" type="uint16_t" dir="in" dest_mod="" dest_port="" />
-    <port name="Set_Brake_Actuation" type="uint8_t" dir="in" dest_mod="" dest_port="" />
+  <module name="Lidar">
+    <port name="points" type="cloud" dir="out" dest_mod="Filter" dest_port="raw" />
   </module>
-  <module name="CommunicationModule">
-    <port name="ReceiveECUStatus" type="CAN_Msg" dir="in" dest_mod="" dest_port="" />
+  <module name="Filter">
+    <port name="raw" type="cloud" dir="in" dest_mod="" dest_port="" />
+    <port name="clean" type="cloud" dir="out" dest_mod="Planner" dest_port="lidar_data" />
+    <port name="clean_copy9" type="cloud" dir="out" dest_mod="Planner" dest_port="lidar_data" />
+  </module>
+  <module name="GPS">
+    <port name="loc" type="vec3" dir="none" dest_mod="" dest_port="" />
+    <port name="loc2" type="vec3" dir="out" dest_mod="Planner" dest_port="loc" />
+    <port name="loc2_copy11" type="vec3" dir="out" dest_mod="Planner" dest_port="loc" />
+    <port name="loc2_copy11_copy12" type="vec3" dir="out" dest_mod="Planner" dest_port="loc" />
+  </module>
+  <module name="Planner">
+    <port name="loc" type="vec3" dir="in" dest_mod="" dest_port="" />
+    <port name="lidar_data" type="cloud" dir="in" dest_mod="" dest_port="" />
+    <port name="cam_objs" type="list" dir="in" dest_mod="" dest_port="" />
+    <port name="loc2" type="vec3" dir="in" dest_mod="" dest_port="" />
+    <port name="feedback_angle" type="float" dir="in" dest_mod="" dest_port="" />
+    <port name="path" type="vector" dir="out" dest_mod="Control" dest_port="target_path" />
+  </module>
+  <module name="AI_Vision">
+    <port name="frame" type="image" dir="in" dest_mod="" dest_port="" />
+    <port name="objs" type="list" dir="out" dest_mod="Planner" dest_port="cam_objs" />
+  </module>
+  <module name="Control">
+    <port name="target_path" type="vector" dir="in" dest_mod="" dest_port="" />
+    <port name="angle" type="float" dir="out" dest_mod="Steering" dest_port="set_angle" />
+  </module>
+  <module name="Brakes">
+    <port name="engage" type="bool" dir="in" dest_mod="" dest_port="" />
+  </module>
+  <module name="Steering">
+    <port name="set_angle" type="float" dir="in" dest_mod="" dest_port="" />
+    <port name="current" type="float" dir="out" dest_mod="Planner" dest_port="feedback_angle" />
+    <port name="current_copy10" type="float" dir="none" dest_mod="" dest_port="" />
   </module>
 </root>

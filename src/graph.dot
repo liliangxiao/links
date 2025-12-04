@@ -6,83 +6,183 @@ digraph G {
   node [shape=plain, fontname="Arial", fontsize=12];
   edge [fontname="Arial", fontsize=10];
 
-  SensorModule [label=<
+  Camera [label=<
    <table border="0" cellborder="0" cellspacing="0" cellpadding="0">
     <tr>
       <td>
       </td>
       <td>
         <table border="1" cellborder="0" cellspacing="0" cellpadding="8" bgcolor="#f0f0f0">
-          <tr><td><b>SensorModule</b></td></tr>
+          <tr><td><b>Camera</b></td></tr>
         </table>
       </td>
       <td>
         <table border="0" cellborder="1" cellspacing="0" cellpadding="4" bgcolor="#ffffff">
-          <tr><td port="WheelSpeed_FL">WheelSpeed_FL</td></tr>
-          <tr><td port="WheelSpeed_FR">WheelSpeed_FR</td></tr>
-          <tr><td port="ThrottlePosition">ThrottlePosition</td></tr>
-          <tr><td port="BrakePressure">BrakePressure</td></tr>
+          <tr><td port="raw">raw</td></tr>
         </table>
       </td>
     </tr>
    </table>>];
 
-  ECU [label=<
+  ISP [label=<
    <table border="0" cellborder="0" cellspacing="0" cellpadding="0">
     <tr>
       <td>
         <table border="0" cellborder="1" cellspacing="0" cellpadding="4" bgcolor="#ffffff">
-          <tr><td port="Input_WheelSpeed_FL">Input_WheelSpeed_FL</td></tr>
-          <tr><td port="Input_WheelSpeed_FR">Input_WheelSpeed_FR</td></tr>
-          <tr><td port="Input_ThrottlePosition">Input_ThrottlePosition</td></tr>
-          <tr><td port="Input_BrakePressure">Input_BrakePressure</td></tr>
+          <tr><td port="input">input</td></tr>
         </table>
       </td>
       <td>
         <table border="1" cellborder="0" cellspacing="0" cellpadding="8" bgcolor="#f0f0f0">
-          <tr><td><b>ECU</b></td></tr>
+          <tr><td><b>ISP</b></td></tr>
         </table>
       </td>
       <td>
         <table border="0" cellborder="1" cellspacing="0" cellpadding="4" bgcolor="#ffffff">
-          <tr><td port="Output_Engine_RPM">Output_Engine_RPM</td></tr>
-          <tr><td port="Output_Brake_Actuation">Output_Brake_Actuation</td></tr>
-          <tr><td port="Output_Vehicle_Status">Output_Vehicle_Status</td></tr>
+          <tr><td port="proc2">proc2</td></tr>
         </table>
       </td>
     </tr>
    </table>>];
 
-  ActuatorModule [label=<
+  Lidar [label=<
+   <table border="0" cellborder="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td>
+      </td>
+      <td>
+        <table border="1" cellborder="0" cellspacing="0" cellpadding="8" bgcolor="#f0f0f0">
+          <tr><td><b>Lidar</b></td></tr>
+        </table>
+      </td>
+      <td>
+        <table border="0" cellborder="1" cellspacing="0" cellpadding="4" bgcolor="#ffffff">
+          <tr><td port="points">points</td></tr>
+        </table>
+      </td>
+    </tr>
+   </table>>];
+
+  Filter [label=<
    <table border="0" cellborder="0" cellspacing="0" cellpadding="0">
     <tr>
       <td>
         <table border="0" cellborder="1" cellspacing="0" cellpadding="4" bgcolor="#ffffff">
-          <tr><td port="Set_Engine_RPM">Set_Engine_RPM</td></tr>
-          <tr><td port="Set_Brake_Actuation">Set_Brake_Actuation</td></tr>
+          <tr><td port="raw">raw</td></tr>
         </table>
       </td>
       <td>
         <table border="1" cellborder="0" cellspacing="0" cellpadding="8" bgcolor="#f0f0f0">
-          <tr><td><b>ActuatorModule</b></td></tr>
+          <tr><td><b>Filter</b></td></tr>
         </table>
       </td>
       <td>
+        <table border="0" cellborder="1" cellspacing="0" cellpadding="4" bgcolor="#ffffff">
+          <tr><td port="clean">clean</td></tr>
+          <tr><td port="clean_copy9">clean_copy9</td></tr>
+        </table>
       </td>
     </tr>
    </table>>];
 
-  CommunicationModule [label=<
+  GPS [label=<
+   <table border="0" cellborder="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td>
+      </td>
+      <td>
+        <table border="1" cellborder="0" cellspacing="0" cellpadding="8" bgcolor="#f0f0f0">
+          <tr><td><b>GPS</b></td></tr>
+        </table>
+      </td>
+      <td>
+        <table border="0" cellborder="1" cellspacing="0" cellpadding="4" bgcolor="#ffffff">
+          <tr><td port="loc2">loc2</td></tr>
+          <tr><td port="loc2_copy11">loc2_copy11</td></tr>
+          <tr><td port="loc2_copy11_copy12">loc2_copy11_copy12</td></tr>
+        </table>
+      </td>
+    </tr>
+   </table>>];
+
+  Planner [label=<
    <table border="0" cellborder="0" cellspacing="0" cellpadding="0">
     <tr>
       <td>
         <table border="0" cellborder="1" cellspacing="0" cellpadding="4" bgcolor="#ffffff">
-          <tr><td port="ReceiveECUStatus">ReceiveECUStatus</td></tr>
+          <tr><td port="loc">loc</td></tr>
+          <tr><td port="lidar_data">lidar_data</td></tr>
+          <tr><td port="cam_objs">cam_objs</td></tr>
+          <tr><td port="loc2">loc2</td></tr>
+          <tr><td port="feedback_angle">feedback_angle</td></tr>
         </table>
       </td>
       <td>
         <table border="1" cellborder="0" cellspacing="0" cellpadding="8" bgcolor="#f0f0f0">
-          <tr><td><b>CommunicationModule</b></td></tr>
+          <tr><td><b>Planner</b></td></tr>
+        </table>
+      </td>
+      <td>
+        <table border="0" cellborder="1" cellspacing="0" cellpadding="4" bgcolor="#ffffff">
+          <tr><td port="path">path</td></tr>
+        </table>
+      </td>
+    </tr>
+   </table>>];
+
+  AI_Vision [label=<
+   <table border="0" cellborder="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td>
+        <table border="0" cellborder="1" cellspacing="0" cellpadding="4" bgcolor="#ffffff">
+          <tr><td port="frame">frame</td></tr>
+        </table>
+      </td>
+      <td>
+        <table border="1" cellborder="0" cellspacing="0" cellpadding="8" bgcolor="#f0f0f0">
+          <tr><td><b>AI_Vision</b></td></tr>
+        </table>
+      </td>
+      <td>
+        <table border="0" cellborder="1" cellspacing="0" cellpadding="4" bgcolor="#ffffff">
+          <tr><td port="objs">objs</td></tr>
+        </table>
+      </td>
+    </tr>
+   </table>>];
+
+  Control [label=<
+   <table border="0" cellborder="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td>
+        <table border="0" cellborder="1" cellspacing="0" cellpadding="4" bgcolor="#ffffff">
+          <tr><td port="target_path">target_path</td></tr>
+        </table>
+      </td>
+      <td>
+        <table border="1" cellborder="0" cellspacing="0" cellpadding="8" bgcolor="#f0f0f0">
+          <tr><td><b>Control</b></td></tr>
+        </table>
+      </td>
+      <td>
+        <table border="0" cellborder="1" cellspacing="0" cellpadding="4" bgcolor="#ffffff">
+          <tr><td port="angle">angle</td></tr>
+        </table>
+      </td>
+    </tr>
+   </table>>];
+
+  Brakes [label=<
+   <table border="0" cellborder="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td>
+        <table border="0" cellborder="1" cellspacing="0" cellpadding="4" bgcolor="#ffffff">
+          <tr><td port="engage">engage</td></tr>
+        </table>
+      </td>
+      <td>
+        <table border="1" cellborder="0" cellspacing="0" cellpadding="8" bgcolor="#f0f0f0">
+          <tr><td><b>Brakes</b></td></tr>
         </table>
       </td>
       <td>
@@ -90,12 +190,38 @@ digraph G {
     </tr>
    </table>>];
 
+  Steering [label=<
+   <table border="0" cellborder="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td>
+        <table border="0" cellborder="1" cellspacing="0" cellpadding="4" bgcolor="#ffffff">
+          <tr><td port="set_angle">set_angle</td></tr>
+        </table>
+      </td>
+      <td>
+        <table border="1" cellborder="0" cellspacing="0" cellpadding="8" bgcolor="#f0f0f0">
+          <tr><td><b>Steering</b></td></tr>
+        </table>
+      </td>
+      <td>
+        <table border="0" cellborder="1" cellspacing="0" cellpadding="4" bgcolor="#ffffff">
+          <tr><td port="current">current</td></tr>
+        </table>
+      </td>
+    </tr>
+   </table>>];
 
-  SensorModule:WheelSpeed_FL -> ECU:Input_WheelSpeed_FL;
-  SensorModule:WheelSpeed_FR -> ECU:Input_WheelSpeed_FR;
-  SensorModule:ThrottlePosition -> ECU:Input_ThrottlePosition;
-  SensorModule:BrakePressure -> ECU:Input_BrakePressure;
-  ECU:Output_Engine_RPM -> ActuatorModule:Set_Engine_RPM;
-  ECU:Output_Brake_Actuation -> ActuatorModule:Set_Brake_Actuation;
-  ECU:Output_Vehicle_Status -> CommunicationModule:ReceiveECUStatus;
+
+  Camera:raw -> ISP:input;
+  ISP:proc2 -> AI_Vision:frame;
+  Lidar:points -> Filter:raw;
+  Filter:clean -> Planner:lidar_data;
+  Filter:clean_copy9 -> Planner:lidar_data;
+  GPS:loc2 -> Planner:loc;
+  GPS:loc2_copy11 -> Planner:loc;
+  GPS:loc2_copy11_copy12 -> Planner:loc;
+  Planner:path -> Control:target_path;
+  AI_Vision:objs -> Planner:cam_objs;
+  Control:angle -> Steering:set_angle;
+  Steering:current -> Planner:feedback_angle;
 }
